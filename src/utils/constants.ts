@@ -1,5 +1,5 @@
 // Contract address (should come from environment variable in production)
-export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x21adB6b3E3d6d2AF60257Aae45A002b15B28d7eE";
+export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0xAf42791b760b0471525948e541e66B5a1B3c55F9";
 
 // ABI for the ZepPay contract
 export const ZepPayABI = [
@@ -606,4 +606,4 @@ export const CATEGORIES = [
 ];
 
 // USDC token address on Base
-export const USDC_ADDRESS = "0x21adB6b3E3d6d2AF60257Aae45A002b15B28d7eE";
+export const USDC_ADDRESS = "0xAf42791b760b0471525948e541e66B5a1B3c55F9";
