@@ -1,19 +1,23 @@
+---
+description: 
+globs: 
+---
 # Comprehensive Coinbase Developer Platform (CDP) SDK Documentation
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [SDK Configuration](#sdk-configuration)
-4. [Wallet Management](#wallet-management)
-5. [Address Management](#address-management)
-6. [Transfers](#transfers)
-7. [Trades](#trades)
-8. [Smart Contract Interactions](#smart-contract-interactions)
-9. [Token Deployments](#token-deployments)
-10. [Message Signing](#message-signing)
-11. [Balances and Transactions](#balances-and-transactions)
-12. [Server-Signer Integration](#server-signer-integration)
-13. [Error Handling](#error-handling)
+1. [Introduction](mdc:#introduction)
+2. [Installation](mdc:#installation)
+3. [SDK Configuration](mdc:#sdk-configuration)
+4. [Wallet Management](mdc:#wallet-management)
+5. [Address Management](mdc:#address-management)
+6. [Transfers](mdc:#transfers)
+7. [Trades](mdc:#trades)
+8. [Smart Contract Interactions](mdc:#smart-contract-interactions)
+9. [Token Deployments](mdc:#token-deployments)
+10. [Message Signing](mdc:#message-signing)
+11. [Balances and Transactions](mdc:#balances-and-transactions)
+12. [Server-Signer Integration](mdc:#server-signer-integration)
+13. [Error Handling](mdc:#error-handling)
 
 ## Introduction
 

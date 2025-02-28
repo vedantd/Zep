@@ -17,9 +17,7 @@ type MerchantViewProps = {
 const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
   const { address } = useAccount();
   const [, setIsRegistered] = useState(false);
-  const [view, setView] = useState<"register" | "dashboard" | "payment">(
-    "register"
-  );
+  const [view, setView] = useState<"register" | "dashboard">("register");
   const [merchantInfo, setMerchantInfo] = useState({
     businessName: "",
     category: 0, // Default to Groceries
@@ -30,6 +28,7 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
     otp: "",
   });
   const [otpRequested, setOtpRequested] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const categories = ["Groceries", "Healthcare", "Education", "Emergency"];
 
@@ -42,7 +41,7 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
 
   const handleRequestOtp = async () => {
     if (!paymentInfo.beneficiaryPhone || !paymentInfo.amount) {
-      alert("Please fill in all fields");
+      setError("Please fill in all fields");
       return;
     }
 
@@ -51,23 +50,27 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
     const simulatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
 
     setOtpRequested(true);
+    setError(null);
 
-    alert(
-      `Demo OTP: ${simulatedOtp} (In a real app, this would be sent to the beneficiary's phone)`
-    );
+    // For demo purposes - in a real app, this would be sent to the beneficiary's phone
+    alert(`Demo OTP: ${simulatedOtp}`);
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="bg-green-600 px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-white">
-          Merchant Dashboard
-        </h3>
+    <div className="max-w-md mx-auto bg-white rounded-md shadow-sm overflow-hidden">
+      <div className="bg-green-600 px-3 py-3">
+        <h3 className="text-base font-medium text-white">Merchant Dashboard</h3>
       </div>
 
+      {error && (
+        <div className="p-3 bg-red-50 border-b border-red-200 text-red-700 text-sm">
+          {error}
+        </div>
+      )}
+
       {view === "register" && (
-        <div className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="p-4">
+          <h2 className="text-base font-medium text-gray-900 mb-3">
             Register Your Business
           </h2>
 
@@ -89,10 +92,10 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
             }}
             onError={(error) => {
               console.error("Registration error:", error);
-              alert(`Registration failed: ${error.message}`);
+              setError(`Registration failed: ${error.message}`);
             }}
           >
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div>
                 <label
                   htmlFor="businessName"
@@ -140,13 +143,15 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
                 </select>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-2">
                 <TransactionButton text="Register Business" />
               </div>
 
               <TransactionStatus>
-                <TransactionStatusLabel />
-                <TransactionStatusAction />
+                <div className="bg-gray-50 p-2 rounded-md text-sm">
+                  <TransactionStatusLabel />
+                  <TransactionStatusAction />
+                </div>
               </TransactionStatus>
             </div>
           </Transaction>
@@ -154,14 +159,14 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
       )}
 
       {view === "dashboard" && (
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="p-4">
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-base font-medium text-gray-900">
               Accept Payment
             </h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div>
               <label
                 htmlFor="beneficiaryPhone"
@@ -204,10 +209,10 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
             </div>
 
             {!otpRequested ? (
-              <div className="pt-4">
+              <div className="pt-2">
                 <button
                   onClick={handleRequestOtp}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-md text-sm font-medium"
                 >
                   Request Payment
                 </button>
@@ -262,15 +267,18 @@ const MerchantView: React.FC<MerchantViewProps> = ({ contractAddress }) => {
                   }}
                   onError={(error) => {
                     console.error("Payment error:", error);
-                    alert(`Payment failed: ${error.message}`);
+                    setError(`Payment failed: ${error.message}`);
                   }}
                 >
-                  <div className="pt-4">
+                  <div className="pt-2">
                     <TransactionButton text="Process Payment" />
                   </div>
+
                   <TransactionStatus>
-                    <TransactionStatusLabel />
-                    <TransactionStatusAction />
+                    <div className="mt-2 bg-gray-50 p-2 rounded-md text-sm">
+                      <TransactionStatusLabel />
+                      <TransactionStatusAction />
+                    </div>
                   </TransactionStatus>
                 </Transaction>
               </>
