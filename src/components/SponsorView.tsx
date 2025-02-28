@@ -11,7 +11,7 @@ import { ethers } from "ethers";
 import { ZepPayABI } from "../utils/constants";
 import { Avatar, Name, Address } from "@coinbase/onchainkit/identity";
 import { publicClient } from "../utils/wagmi";
-
+// 0x8fcaaeba247f1e4a834bdfec92797c97f2acd32f
 type SponsorViewProps = {
   contractAddress: string;
 };
@@ -46,16 +46,40 @@ const SponsorView: React.FC<SponsorViewProps> = ({ contractAddress }) => {
     null
   );
 
-  // FIXED: Use the correct USDC token address from the contract
   const USDC_CONTRACT_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
 
-  // Get USDC balance with the correct token address
   const { data: usdcBalance } = useBalance({
     address: address,
-    token: USDC_CONTRACT_ADDRESS as `0x${string}`, // Correct USDC on Base
+    token: USDC_CONTRACT_ADDRESS as `0x${string}`,
   });
 
   const categories = ["Groceries", "Healthcare", "Education", "Emergency"];
+
+  const { data: isRegisteredSponsor } = useReadContract({
+    address: contractAddress as `0x${string}`,
+    abi: ZepPayABI,
+    functionName: "isRegisteredSponsor",
+    args: [address],
+  });
+
+  const checkRegistration = () => {
+    if (isRegisteredSponsor) {
+      alert("You are a registered sponsor.");
+    } else {
+      alert("You are not a registered sponsor.");
+    }
+  };
+
+  // // FIXED: Use the correct USDC token address from the contract
+  // const USDC_CONTRACT_ADDRESS = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
+
+  // // Get USDC balance with the correct token address
+  // const { data: usdcBalance } = useBalance({
+  //   address: address,
+  //   token: USDC_CONTRACT_ADDRESS as `0x${string}`, // Correct USDC on Base
+  // });
+
+  // const categories = ["Groceries", "Healthcare", "Education", "Emergency"];
 
   // Update the read contract call
   const { data: beneficiaryMobiles, isError: beneficiaryError } =
@@ -220,6 +244,16 @@ const SponsorView: React.FC<SponsorViewProps> = ({ contractAddress }) => {
               Connect your wallet to continue
             </p>
           )}
+        </div>
+
+        {/* Simple Check Button for Registration */}
+        <div className="p-4">
+          <button
+            onClick={checkRegistration}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+          >
+            Check Registration
+          </button>
         </div>
 
         {error && (

@@ -44,7 +44,7 @@ const config = createConfig({
 });
 
 // Contract address for ZepPay
-const CONTRACT_ADDRESS = "0xAf42791b760b0471525948e541e66B5a1B3c55F9";
+const CONTRACT_ADDRESS = "0x315D0ab74cb39a458F2A0F21fE111Fa35CF771e8";
 
 function AppContent() {
   const [userType, setUserType] = useState<"none" | "sponsor" | "merchant">(

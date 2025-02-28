@@ -1,49 +1,8 @@
 // Contract address (should come from environment variable in production)
-export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0xAf42791b760b0471525948e541e66B5a1B3c55F9";
+export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x315D0ab74cb39a458F2A0F21fE111Fa35CF771e8";
 
 // ABI for the ZepPay contract
 export const ZepPayABI = [
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_mobileNumber",
-				"type": "string"
-			}
-		],
-		"name": "addBeneficiary",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_beneficiaryMobile",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "enum ZepPay.Category",
-				"name": "_category",
-				"type": "uint8"
-			}
-		],
-		"name": "createSponsorship",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -191,72 +150,6 @@ export const ZepPayABI = [
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_beneficiaryMobile",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_otp",
-				"type": "uint256"
-			}
-		],
-		"name": "processPayment",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_businessName",
-				"type": "string"
-			},
-			{
-				"internalType": "enum ZepPay.Category",
-				"name": "_category",
-				"type": "uint8"
-			}
-		],
-		"name": "registerMerchant",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_beneficiaryMobile",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "requestPayment",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -296,12 +189,17 @@ export const ZepPayABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_mobileNumber",
+				"type": "string"
 			}
 		],
-		"name": "transferOwnership",
+		"name": "addBeneficiary",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -362,6 +260,29 @@ export const ZepPayABI = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_beneficiaryMobile",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum ZepPay.Category",
+				"name": "_category",
+				"type": "uint8"
+			}
+		],
+		"name": "createSponsorship",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -449,6 +370,44 @@ export const ZepPayABI = [
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "merchant",
+				"type": "address"
+			}
+		],
+		"name": "isMerchantRegistered",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "sponsor",
+				"type": "address"
+			}
+		],
+		"name": "isRegisteredSponsor",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -522,6 +481,91 @@ export const ZepPayABI = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_beneficiaryMobile",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_otp",
+				"type": "uint256"
+			}
+		],
+		"name": "processPayment",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_businessName",
+				"type": "string"
+			},
+			{
+				"internalType": "enum ZepPay.Category",
+				"name": "_category",
+				"type": "uint8"
+			}
+		],
+		"name": "registerMerchant",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "registeredSponsors",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_beneficiaryMobile",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "requestPayment",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
@@ -583,6 +627,19 @@ export const ZepPayABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "usdcToken",
 		"outputs": [
@@ -595,7 +652,7 @@ export const ZepPayABI = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-];
+]
 
 // Categories
 export const CATEGORIES = [
@@ -606,4 +663,4 @@ export const CATEGORIES = [
 ];
 
 // USDC token address on Base
-export const USDC_ADDRESS = "0xAf42791b760b0471525948e541e66B5a1B3c55F9";
+export const USDC_ADDRESS = "0x315D0ab74cb39a458F2A0F21fE111Fa35CF771e8";

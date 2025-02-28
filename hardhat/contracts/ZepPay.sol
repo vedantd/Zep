@@ -261,4 +261,8 @@ contract ZepPay is Ownable {
     ) external view returns (uint256) {
         return otps[_beneficiaryMobile];
     }
+
+    function isMerchantRegistered(address merchant) external view returns (bool) {
+        return merchants[merchant].registered;
+    }
 }
