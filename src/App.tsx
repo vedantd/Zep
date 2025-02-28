@@ -16,6 +16,7 @@ import HomePage from "./components/HomePage";
 import SponsorView from "./components/SponsorView";
 import MerchantView from "./components/MerchantView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MerchantLanding from "./components/merchant/MerchantLanding";
 
 // Use Base Sepolia for testing
 const chain = baseSepolia;
@@ -222,7 +223,8 @@ function App() {
             },
           }}
         >
-          <AppContent />
+          {/* <AppContent /> */}
+          <MerchantLanding/>
         </OnchainKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
