@@ -52,6 +52,8 @@ contract ZepPay is Ownable {
 
     // Mapping for OTPs (simple implementation for hackathon)
     mapping(string => uint256) public otps;
+    // Mapping for OTP expiration timestamps
+    mapping(string => uint256) public otpExpiry;
 
     // Events
     event BeneficiaryAdded(address sponsor, string mobileNumber, string name);
@@ -73,9 +75,10 @@ contract ZepPay is Ownable {
         uint256 amount,
         uint256 sponsorshipId
     );
-    event OtpGenerated(string beneficiaryMobile, uint256 amount);
+    // Updated: Now includes the OTP in the event
+    event OtpGenerated(string beneficiaryMobile, uint256 otp, uint256 amount);
 
-    // **Fix: Add constructor to pass the owner**
+    // Constructor
     constructor() Ownable(msg.sender) {}
 
     // Add a new beneficiary
@@ -158,7 +161,7 @@ contract ZepPay is Ownable {
     function requestPayment(
         string memory _beneficiaryMobile,
         uint256 _amount
-    ) external {
+    ) external returns (uint256) {
         require(merchants[msg.sender].registered, "Merchant not registered");
         require(_amount > 0, "Amount must be greater than 0");
 
@@ -170,14 +173,26 @@ contract ZepPay is Ownable {
             "No sponsorships found for beneficiary"
         );
 
+        // Generate a 4-digit OTP
         uint256 otp = uint256(
             keccak256(
-                abi.encodePacked(block.timestamp, _beneficiaryMobile, _amount)
+                abi.encodePacked(
+                    block.timestamp,
+                    _beneficiaryMobile,
+                    _amount,
+                    msg.sender
+                )
             )
         ) % 10000;
-        otps[_beneficiaryMobile] = otp;
 
-        emit OtpGenerated(_beneficiaryMobile, _amount);
+        // Set the OTP and expiration (15 seconds)
+        otps[_beneficiaryMobile] = otp;
+        otpExpiry[_beneficiaryMobile] = block.timestamp + 15;
+
+        // Emit event with OTP included
+        emit OtpGenerated(_beneficiaryMobile, otp, _amount);
+
+        return otp;
     }
 
     // Process payment with OTP
@@ -189,6 +204,10 @@ contract ZepPay is Ownable {
         require(merchants[msg.sender].registered, "Merchant not registered");
         require(_amount > 0, "Amount must be greater than 0");
         require(otps[_beneficiaryMobile] == _otp, "Invalid OTP");
+        require(
+            block.timestamp <= otpExpiry[_beneficiaryMobile],
+            "OTP has expired"
+        );
 
         uint256[] memory sponsorshipIds = beneficiarySponsorships[
             _beneficiaryMobile
@@ -223,7 +242,9 @@ contract ZepPay is Ownable {
             "USDC transfer failed"
         );
 
+        // Clear OTP data after use
         delete otps[_beneficiaryMobile];
+        delete otpExpiry[_beneficiaryMobile];
 
         emit PaymentProcessed(
             msg.sender,
@@ -258,11 +279,7 @@ contract ZepPay is Ownable {
 
     function getOtp(
         string memory _beneficiaryMobile
-    ) external view returns (uint256) {
-        return otps[_beneficiaryMobile];
-    }
-
-    function isMerchantRegistered(address merchant) external view returns (bool) {
-        return merchants[merchant].registered;
+    ) external view returns (uint256, uint256) {
+        return (otps[_beneficiaryMobile], otpExpiry[_beneficiaryMobile]);
     }
 }

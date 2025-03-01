@@ -1,5 +1,5 @@
 // Contract address (should come from environment variable in production)
-export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0x315D0ab74cb39a458F2A0F21fE111Fa35CF771e8";
+export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "0xD2c89942a07074777c3BEf32EE0B27cb87D0a658";
 
 // ABI for the ZepPay contract
 export const ZepPayABI = [
