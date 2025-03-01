@@ -1,4 +1,68 @@
-/* ===== Navbar Styling ===== */
+/* ===== Global Styles ===== */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #1a202c;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main container ensuring footer stays at bottom */
+.min-h-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== Footer Styles ===== */
+footer {
+  background-color: #1a202c;
+  padding: 16px 0;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.footer-container {
+  max-width: 896px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Footer Text */
+.footer-text {
+  font-size: 14px;
+  color: #4a5568;
+}
+
+/* Footer Links */
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #2563eb;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+  color: #1e4bb5;
+}
+
+/* ===== Navigation Bar Styles ===== */
 .navbar {
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -17,7 +81,7 @@
   align-items: center;
 }
 
-/* Left Side - Logo */
+/* Navbar Left Side */
 .navbar-left {
   display: flex;
   align-items: center;
@@ -25,7 +89,7 @@
 
 /* Logo */
 .logo h1 {
-  font-size: 18px;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #1a202c;
   cursor: pointer;
@@ -34,6 +98,13 @@
 
 .logo h1:hover {
   color: #2563eb;
+}
+
+/* Navbar Right Side */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* Role Switcher */
@@ -50,7 +121,6 @@
   color: #4a5568;
 }
 
-/* Switch Button */
 .switch-button {
   font-size: 14px;
   color: #2563eb;
@@ -64,19 +134,31 @@
   color: #1a202c;
 }
 
-/* ===== Right Side (Wallet Section) ===== */
-.navbar-right {
+/* ===== Wallet Styles ===== */
+.wallet-container {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
-/* Add Funds Button */
-.wallet-fund {
-  display: flex;
-  align-items: center;
+/* Connect Wallet Button */
+.connect-button {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background-color: #2563eb;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
+.connect-button:hover {
+  background-color: #1e4bb5;
+}
+
+/* Fund Button */
 .fund-button {
   padding: 8px 14px;
   font-size: 14px;
@@ -93,52 +175,56 @@
   background-color: #1e4bb5;
 }
 
-/* ===== Wallet Dropdown Fix ===== */
+/* Wallet Dropdown */
 .wallet-dropdown {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background-color: white;
   padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  width: 200px;
+  border-bottom: 1px solid #f7fafc;
 }
 
-/* Wallet Dropdown Content */
-.wallet-dropdown-content {
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Wallet Avatar */
+.wallet-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+/* Wallet Details */
+.wallet-details {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px;
 }
 
-/* Wallet Disconnect Button */
-.wallet-disconnect {
-  padding: 10px;
-  border-top: 1px solid #e2e8f0;
-  text-align: center;
-}
-
-.disconnect-button {
-  width: 100%;
-  background-color: #ef4444;
-  color: white;
-  padding: 10px;
+.wallet-name {
   font-size: 14px;
   font-weight: 600;
-  border-radius: 6px;
+}
+
+.wallet-address {
+  font-size: 12px;
+  color: #4a5568;
+}
+
+/* Disconnect Button */
+.disconnect-button {
+  background: none;
   border: none;
+  font-size: 14px;
+  color: #dc2626;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .disconnect-button:hover {
-  background-color: #dc2626;
+  color: #b91c1c;
 }
 
-/* ===== Mobile Responsiveness ===== */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .navbar-container {
     flex-direction: column;
@@ -154,11 +240,180 @@
     justify-content: center;
   }
 
-  .wallet-dropdown {
-    top: 40px;
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+/* ===== Navigation Bar ===== */
+.navbar {
+  background: linear-gradient(90deg, #3b82f6, #9333ea); /* Blue to Violet Gradient */
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 14px 24px;
+  
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navbar Container */
+.navbar-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo h1:hover {
+  transform: scale(1.05);
+}
+
+/* Role Switcher */
+.role-switcher {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  gap: 10px;
+}
+
+.role-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f3f4f6;
+}
+
+.switch-button {
+  font-size: 14px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+.switch-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+/* ===== Right Side (Wallet Section) ===== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Connect Wallet Button */
+.connect-button {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+.connect-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+/* Wallet Dropdown */
+.wallet-dropdown {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Wallet Info */
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Wallet Avatar */
+.wallet-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+/* Wallet Details */
+.wallet-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.wallet-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.wallet-address {
+  font-size: 12px;
+  color: #d1d5db;
+}
+
+/* Wallet Fund */
+.wallet-fund {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Fund Button */
+.fund-button {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+.fund-button:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .role-switcher {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .navbar-right {
+    justify-content: center;
   }
 }

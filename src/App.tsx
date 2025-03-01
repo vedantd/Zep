@@ -250,14 +250,22 @@ function AppContent() {
       <Wallet>
         <ConnectWallet className="connect-button" />
         {isConnected && (
-          <WalletDropdown className="wallet-dropdown">
-            <div className="wallet-dropdown-content">
-              {/* Disconnect Button */}
-              <div className="wallet-disconnect">
-                <WalletDropdownDisconnect className="disconnect-button" />
-              </div>
+        <WalletDropdown>
+        <Identity
+          address={address}
+          hasCopyAddressOnClick
+          className="wallet-dropdown"
+        >
+          <div className="wallet-info">
+            <Avatar address={address} className="wallet-avatar" />
+            <div className="wallet-details">
+              <Name address={address} className="wallet-name" />
+              <Address address={address} className="wallet-address" />
             </div>
-          </WalletDropdown>
+          </div>
+        </Identity>
+      </WalletDropdown>
+      
         )}
       </Wallet>
     </div>
