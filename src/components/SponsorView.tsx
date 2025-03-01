@@ -11,6 +11,7 @@ import { ethers } from "ethers";
 import { ZepPayABI } from "../utils/constants";
 import { Avatar, Name, Address } from "@coinbase/onchainkit/identity";
 import { publicClient } from "../utils/wagmi";
+import "./SponsorView.css"
 // 0x8fcaaeba247f1e4a834bdfec92797c97f2acd32f
 type SponsorViewProps = {
   contractAddress: string;
@@ -247,14 +248,14 @@ const SponsorView: React.FC<SponsorViewProps> = ({ contractAddress }) => {
         </div>
 
         {/* Simple Check Button for Registration */}
-        <div className="p-4">
+        {/* <div className="p-4">
           <button
             onClick={checkRegistration}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
           >
             Check Registration
           </button>
-        </div>
+        </div> */}
 
         {error && (
           <div className="p-3 bg-red-50 border-l-4 border-red-500 text-red-700">
@@ -299,7 +300,7 @@ const SponsorView: React.FC<SponsorViewProps> = ({ contractAddress }) => {
         <div className="flex border-b border-gray-200">
           <button
             onClick={() => setView("list")}
-            className={`flex-1 py-3 px-4 text-center font-medium ${
+            className={`bg-blue-500 flex-1 py-3 px-4 text-center font-medium ${
               view === "list"
                 ? "text-blue-600 border-b-2 border-blue-500"
                 : "text-gray-500 hover:text-gray-700"
@@ -309,7 +310,7 @@ const SponsorView: React.FC<SponsorViewProps> = ({ contractAddress }) => {
           </button>
           <button
             onClick={() => setView("add")}
-            className={`flex-1 py-3 px-4 text-center font-medium ${
+            className={`flex-1 bg-blue-500 py-3 px-4 text-center font-medium ${
               view === "add"
                 ? "text-blue-600 border-b-2 border-blue-500"
                 : "text-gray-500 hover:text-gray-700"
@@ -547,7 +548,7 @@ const SponsorView: React.FC<SponsorViewProps> = ({ contractAddress }) => {
                 onChange={(e) =>
                   setSponsorship({ ...sponsorship, amount: e.target.value })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="input-form w-full p-2 border border-gray-300 rounded-md"
                 placeholder="0.00"
                 min="0"
               />
@@ -565,7 +566,7 @@ const SponsorView: React.FC<SponsorViewProps> = ({ contractAddress }) => {
                     category: parseInt(e.target.value),
                   })
                 }
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 rounded-md input-form "
               >
                 {categories.map((category, index) => (
                   <option key={index} value={index}>

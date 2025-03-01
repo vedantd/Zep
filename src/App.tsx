@@ -75,7 +75,12 @@ function AppContent() {
   }, [userType, isConnected, address]);
 
   const handleSwitchRole = () => {
+    // Clear the role and navigate back to the dashboard
     setUserType("none");
+    // Also clear from localStorage to prevent auto-redirect
+    if (address) {
+      localStorage.removeItem(`zeppay-role-${address}`);
+    }
   };
 
   return (
