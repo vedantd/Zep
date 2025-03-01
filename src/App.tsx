@@ -16,7 +16,7 @@ import HomePage from "./components/HomePage";
 import SponsorView from "./components/SponsorView";
 import MerchantView from "./components/MerchantView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import "./App.css";
 // Use Base Sepolia for testing
 const chain = baseSepolia;
 
@@ -106,7 +106,7 @@ function AppContent() {
         </div>
       )}
 
-      <nav className="bg-white shadow-sm sticky top-0 z-10">
+      {/* <nav className="bg-white shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between h-12">
             <div className="flex items-center">
@@ -172,7 +172,98 @@ function AppContent() {
             </div>
           </div>
         </div>
-      </nav>
+      </nav> */}
+
+ {/* <nav className="navbar">
+      <div className="navbar-container">
+     
+        <div className="navbar-left">
+          <div className="logo" onClick={() => setUserType("none")}>
+            <h1>ZepPay</h1>
+          </div>
+
+          
+          {isConnected && userType !== "none" && (
+            <div className="role-switcher">
+              <span className="role-text">
+                {userType === "sponsor" ? "Sponsor" : "Merchant"}
+              </span>
+              <button onClick={handleSwitchRole} className="switch-button">
+                Switch
+              </button>
+            </div>
+          )}
+        </div>
+
+      
+        <div className="navbar-right">
+  
+      <div className="wallet-fund">
+        <FundButton text="Add Funds" className="fund-button" />
+      </div>
+
+      
+      <Wallet>
+        <ConnectWallet className="connect-button" />
+        {isConnected && (
+          <WalletDropdown className="wallet-dropdown">
+            <div className="wallet-dropdown-content">
+             
+              <WalletDropdownDisconnect className="disconnect-button" />
+            </div>
+          </WalletDropdown>
+        )}
+      </Wallet>
+    </div>
+      </div>
+    </nav>  */}
+
+<nav className="navbar">
+  <div className="navbar-container">
+    {/* Left Side - Logo */}
+    <div className="navbar-left">
+      <div className="logo" onClick={() => setUserType("none")}>
+        <h1>ZepPay</h1>
+      </div>
+
+      {/* Role Switcher */}
+      {isConnected && userType !== "none" && (
+        <div className="role-switcher">
+          <span className="role-text">
+            {userType === "sponsor" ? "Sponsor" : "Merchant"}
+          </span>
+          <button onClick={handleSwitchRole} className="switch-button">
+            Switch
+          </button>
+        </div>
+      )}
+    </div>
+
+    {/* Right Side - Wallet */}
+    <div className="navbar-right">
+      {/* Add Funds Button */}
+      <div className="wallet-fund">
+        <FundButton text="Add Funds" className="fund-button" />
+      </div>
+
+      {/* Wallet Dropdown */}
+      <Wallet>
+        <ConnectWallet className="connect-button" />
+        {isConnected && (
+          <WalletDropdown className="wallet-dropdown">
+            <div className="wallet-dropdown-content">
+              {/* Disconnect Button */}
+              <div className="wallet-disconnect">
+                <WalletDropdownDisconnect className="disconnect-button" />
+              </div>
+            </div>
+          </WalletDropdown>
+        )}
+      </Wallet>
+    </div>
+  </div>
+</nav>
+
 
       <main className="max-w-4xl mx-auto py-6 px-4 flex-grow">
         {!isConnected ? (

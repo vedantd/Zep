@@ -1,42 +1,164 @@
-/* Minimal App.css with clean styling */
-#root {
+/* ===== Navbar Styling ===== */
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 12px 24px;
+}
+
+.navbar-container {
   max-width: 1280px;
   margin: 0 auto;
-  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left Side - Logo */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.logo h1 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a202c;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.logo h1:hover {
+  color: #2563eb;
+}
+
+/* Role Switcher */
+.role-switcher {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  gap: 10px;
+}
+
+.role-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+/* Switch Button */
+.switch-button {
+  font-size: 14px;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.switch-button:hover {
+  color: #1a202c;
+}
+
+/* ===== Right Side (Wallet Section) ===== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Add Funds Button */
+.wallet-fund {
+  display: flex;
+  align-items: center;
+}
+
+.fund-button {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background-color: #2563eb;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.fund-button:hover {
+  background-color: #1e4bb5;
+}
+
+/* ===== Wallet Dropdown Fix ===== */
+.wallet-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  width: 200px;
+}
+
+/* Wallet Dropdown Content */
+.wallet-dropdown-content {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  padding: 10px;
 }
 
-button {
-  cursor: pointer;
-  transition: all 0.15s ease;
+/* Wallet Disconnect Button */
+.wallet-disconnect {
+  padding: 10px;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
 }
 
-button:hover {
-  transform: translateY(-1px);
-}
-
-input, select {
+.disconnect-button {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background-color: #ef4444;
+  color: white;
+  padding: 10px;
   font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
-input:focus, select:focus {
-  border-color: #3b82f6;
-  outline: none;
-  box-shadow: 0 0 3px rgba(59, 130, 246, 0.3);
+.disconnect-button:hover {
+  background-color: #dc2626;
 }
 
-/* Responsive adjustments */
+/* ===== Mobile Responsiveness ===== */
 @media (max-width: 768px) {
-  .compact-section {
-    padding: 0.75rem;
+  .navbar-container {
+    flex-direction: column;
+    text-align: center;
   }
-  
-  nav {
-    padding: 0.5rem;
+
+  .role-switcher {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .navbar-right {
+    justify-content: center;
+  }
+
+  .wallet-dropdown {
+    top: 40px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
   }
 }

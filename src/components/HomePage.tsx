@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./HomePage.css";
 type HomePageProps = {
   onSelectUserType: (type: "sponsor" | "merchant") => void;
 };
