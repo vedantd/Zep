@@ -14,7 +14,7 @@ export const sendOtpViaWhatsApp = async (
 ): Promise<{ success: boolean; message: string }> => {
   try {
     // Twilio account credentials
-    const accountSid = "ACdee9811e109e9275dc1ecb54034cccf8";
+    const accountSid = "";
     const authToken =
       import.meta.env.VITE_TWILIO_AUTH_TOKEN || "your_auth_token";
 
